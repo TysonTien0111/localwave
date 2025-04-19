@@ -119,7 +119,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/tyson-tien-nguyen/localwave/app/generated/prisma",
+      "value": "/workspaces/localwave/app/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -128,17 +128,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "debian-openssl-1.1.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/tyson-tien-nguyen/localwave/prisma/schema.prisma",
+    "sourceFilePath": "/workspaces/localwave/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../prisma/.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.6.0",

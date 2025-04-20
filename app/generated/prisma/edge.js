@@ -137,7 +137,8 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../prisma/.env"
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.6.0",

@@ -5,27 +5,15 @@ const prisma = new PrismaClient();
 
 export async function POST(req) {
   try {
-    const { email, password, role } = await req.json();
-    if (!email || !password || !role) {
-      return new Response(JSON.stringify({ error: "Missing fields" }), { status: 400 });
-    }
-    // Check if user already exists
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-      return new Response(JSON.stringify({ error: "User already exists" }), { status: 400 });
-    }
-    // Hash password
+    const { email, password } = await req.json();
+    // Only allow seller role
+    const role = "seller";
     const hashedPassword = await bcrypt.hash(password, 10);
-    // Create user
-    await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        role,
-      },
+    const user = await prisma.user.create({
+      data: { email, password: hashedPassword, role },
     });
-    return new Response(JSON.stringify({ success: true }), { status: 201 });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: "Server error" }), { status: 500 });
+    return new Response(JSON.stringify({ user: { id: user.id, email: user.email, role: user.role } }), { status: 201 });
+  } catch (e) {
+    return new Response(JSON.stringify({ error: "Email already in use or invalid data." }), { status: 400 });
   }
 }

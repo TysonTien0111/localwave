@@ -9,7 +9,6 @@ export default function NavBar() {
   if (status === "loading") {
     return (
       <nav className="flex gap-4 p-4 border-b items-center justify-center">
-        {/* Replace with your animated logo or spinner */}
         <img src="/globe.svg" alt="Loading..." className="animate-spin h-6 w-6" />
       </nav>
     );
@@ -18,9 +17,7 @@ export default function NavBar() {
   return (
     <nav className="flex gap-4 p-4 border-b items-center">
       <Link href="/">Home</Link>
-      {session && role === "buyer" && <Link href="/dashboard/buyer">Buyer Dashboard</Link>}
       {session && role === "seller" && <Link href="/dashboard/seller">Seller Dashboard</Link>}
-      {session && role === "manufacturer" && <Link href="/dashboard/manufacturer">Manufacturer Dashboard</Link>}
       {!session && <Link href="/auth/signin">Sign In</Link>}
       {!session && <Link href="/auth/signup">Sign Up</Link>}
       {session && (

@@ -19,7 +19,7 @@ const authOptions = {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-        if (user && await bcrypt.compare(credentials.password, user.password)) {
+        if (user && await bcrypt.compare(credentials.password, user.password) && user.role === "seller") {
           return { id: user.id, email: user.email, role: user.role };
         }
         return null;

@@ -7,7 +7,7 @@ async function main() {
   await prisma.product.deleteMany();
   await prisma.user.deleteMany();
 
-  // Create users (sellers)
+  // Create only sellers
   const passwordHash = await bcrypt.hash('password123', 10);
   const seller1 = await prisma.user.create({
     data: {

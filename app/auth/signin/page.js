@@ -21,8 +21,14 @@ export default function SignInPage() {
     if (res.error) {
       setError("Invalid email or password");
     } else {
-      // Redirect to dashboard or home
-      router.push("/");
+      // Fetch session to get user role
+      const sessionRes = await fetch("/api/auth/session");
+      const session = await sessionRes.json();
+      const role = session?.user?.role;
+      if (role === "buyer") router.push("/dashboard/buyer");
+      else if (role === "seller") router.push("/dashboard/seller");
+      else if (role === "manufacturer") router.push("/dashboard/manufacturer");
+      else router.push("/");
     }
   }
 

@@ -54,9 +54,7 @@ export default function Home() {
       if (Array.isArray(data)) {
         const processedProducts = data.map(product => ({
           ...product,
-          image: product.image?.startsWith('/images/') 
-            ? `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.name)}`
-            : product.image
+          image: product.image && product.image !== '' ? product.image : '/images/file.svg'
         }));
         setProducts(processedProducts);
       } else {
@@ -159,6 +157,16 @@ export default function Home() {
             </div>
           )}
 
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => handleProductSearch()}
+              className="bg-indigo-500 hover:bg-indigo-700 text-white px-4 py-2 rounded font-semibold transition shadow"
+              disabled={loading}
+            >
+              {loading ? 'Refreshing...' : 'Refresh Products'}
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {loading ? (
               <div className="col-span-full text-center text-gray-600">
@@ -168,9 +176,10 @@ export default function Home() {
               products.map((product) => (
                 <div key={product.id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
                   <img 
-                    src={product.image || `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.name)}`}
+                    src={product.image && product.image !== '' ? product.image : '/images/wave.svg'}
                     alt={product.name}
                     className="w-full h-48 object-cover rounded-lg mb-4"
+                    onError={e => { e.target.src = '/images/wave.svg'; }}
                   />
                   <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
                   <p className="text-indigo-600 font-bold mt-2">${product.price}</p>
